@@ -18,13 +18,13 @@ application = Flask(__name__)
 def status():
     return jsonify({'status': 'ok'})
 
-@application.route('/forecast/<str:method>', methods=['POST'])
+@application.route('/forecast/<method>', methods=['POST'])
 def forecast(method):
     data = request.data or '{}'
     body = json.loads(data)
-    if method == 'arima':
+    if str(method) == 'arima':
         predictions = arima(body)
-    elif method == 'ets':
+    elif str(method) == 'ets':
         predictions = ets(body)
     else:
         predictions = {'predictions': 'invalid method'}
