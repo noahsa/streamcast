@@ -18,8 +18,8 @@ application = Flask(__name__)
 def status():
     return jsonify({'status': 'ok'})
 
-@application.route('/forecast/<method>', methods=['POST'])
-def forecast():
+@application.route('/forecast/<str:method>', methods=['POST'])
+def forecast(method):
     data = request.data or '{}'
     body = json.loads(data)
     if method == 'arima':
